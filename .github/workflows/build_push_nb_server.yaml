@@ -9,7 +9,7 @@ on:
 
 jobs:
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Build & Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -24,8 +24,7 @@ jobs:
     - name: Run base Notebook Server build and push
       run: |
         cd components/example-notebook-servers/base
-        export NAME=base
-        export IMG=docker.io/nickloukas/test-actions
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -33,8 +32,7 @@ jobs:
     - name: Run codeserver Notebook Server build and push
       run: |
         cd components/example-notebook-servers/codeserver
-        export NAME=codeserver
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -42,8 +40,7 @@ jobs:
     - name: Run codeserver-python Notebook Server build and push
       run: |
         cd components/example-notebook-servers/codeserver-python
-        export NAME=codeserver-python
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -51,8 +48,7 @@ jobs:
     - name: Run jupyter Notebook Server build and push
       run: |
         cd components/example-notebook-servers/jupyter
-        export NAME=jupyter
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -60,8 +56,7 @@ jobs:
     - name: Run jupyter-scipy Notebook Server build and push
       run: |
         cd components/example-notebook-servers/jupyter-scipy
-        export NAME=jupyter-scipy
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -69,8 +64,7 @@ jobs:
     - name: Run jupyter-pytorch-full Notebook Server build and push
       run: |
         cd components/example-notebook-servers/jupyter-pytorch-full
-        export NAME=jupyter-pytorch-full
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -78,8 +72,7 @@ jobs:
     - name: Run jupyter-pytorch-cuda-full Notebook Server build and push
       run: |
         cd components/example-notebook-servers/jupyter-pytorch-cuda-full
-        export NAME=jupyter-pytorch-cuda-full
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -87,8 +80,7 @@ jobs:
     - name: Run jupyter-tensorflow-full Notebook Server build and push
       run: |
         cd components/example-notebook-servers/jupyter-tensorflow-full
-        export NAME=jupyter-tensorflow-full
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -96,8 +88,7 @@ jobs:
     - name: Run jupyter-tensorflow-cuda-full Notebook Server build and push
       run: |
         cd components/example-notebook-servers/jupyter-tensorflow-cuda-full
-        export NAME=jupyter-tensorflow-cuda-full
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -105,8 +96,7 @@ jobs:
     - name: Run rstudio Notebook Server build and push
       run: |
         cd components/example-notebook-servers/rstudio
-        export NAME=rstudio
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
@@ -114,8 +104,7 @@ jobs:
     - name: Run rstudio-tidyverse Notebook Server build and push
       run: |
         cd components/example-notebook-servers/rstudio-tidyverse
-        export NAME=rstudio-tidyverse
-        export IMG=docker.io/nickloukas/test-actions/${NAME}
+        export IMG=docker.io/kubeflownotebookswg
         export TAG=$(git describe --tags --always);
         docker build -t ${IMG}:${TAG} -f Dockerfile . 
         docker push ${IMG}:${TAG}
