@@ -22,4 +22,3 @@ jobs:
       run: |
         cd components/crud-web-apps/jupyter/manifests
         kustomize build overlays/istio
-        echo $?
