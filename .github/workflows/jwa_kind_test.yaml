@@ -63,4 +63,14 @@ jobs:
     - name: Build manifests
       run: |
         cd components/crud-web-apps/jupyter/manifests
-        kustomize build overlays/istio | kubectl apply -f -
+        echo "Installing Istio ..."
+        mkdir istio_tmp
+        pushd istio_tmp >/dev/null
+          curl -L https://istio.io/downloadIstio | ISTIO_VERSION=${ISTIO_VERSION} sh -
+          cd istio-${ISTIO_VERSION}
+          export PATH=$PWD/bin:$PATH
+          istioctl manifest generate > ${SCRIPT_DIR}/../../overlays/istio/generated-manifest.yaml
+        popd
+
+        kubectl create ns istio-system
+        for i in 1 2 3 ; do kustomize build overlays/istio | kubectl apply -f - && break || sleep 15; done
