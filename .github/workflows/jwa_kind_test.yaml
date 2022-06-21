@@ -73,5 +73,6 @@ jobs:
         popd
 
         kubectl create ns istio-system
+        kubectl create ns kubeflow
         for i in 1 2 3 ; do kustomize build components/crud-web-apps/jupyter/manifests/overlays/istio | kubectl apply -f - && break || sleep 15; done
         echo $?
