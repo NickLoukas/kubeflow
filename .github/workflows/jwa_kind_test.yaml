@@ -62,7 +62,7 @@ jobs:
 
     - name: Build manifests
       run: |
-        ISTIO_VERSION="1.12.0"
+        ISTIO_VERSION="1.11.0"
         echo "Installing Istio ..."
         mkdir istio_tmp
         pushd istio_tmp >/dev/null
@@ -75,4 +75,3 @@ jobs:
         kubectl create ns istio-system
         kubectl create ns kubeflow
         for i in 1 2 3 ; do kustomize build components/crud-web-apps/jupyter/manifests/overlays/istio | kubectl apply -f - && break || sleep 15; done
-        echo $?
