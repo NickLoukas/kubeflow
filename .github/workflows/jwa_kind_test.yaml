@@ -69,7 +69,7 @@ jobs:
           curl -L https://istio.io/downloadIstio | ISTIO_VERSION=${ISTIO_VERSION} sh -
           cd istio-${ISTIO_VERSION}
           export PATH=$PWD/bin:$PATH
-          istioctl manifest generate > ./../components/crud-web-apps/jupyter/manifests/overlays/istio/generated-manifest.yaml
+          istioctl manifest generate > /home/runner/work/kubeflow/kubeflow/components/crud-web-apps/jupyter/manifests/overlays/istio/generated-manifest.yaml
         popd
 
         kubectl create ns istio-system
