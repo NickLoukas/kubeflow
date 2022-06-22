@@ -78,4 +78,5 @@ jobs:
     - name: Build & Apply manifests
       run: |
         cd components/crud-web-apps/jupyter/manifests
+        kubectl create ns kubeflow
         kustomize build overlays/istio | kubectl apply -f -
