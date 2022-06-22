@@ -73,7 +73,12 @@ jobs:
         popd
 
     - name: Install cert-manager
-      run: kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager.yaml
+      run: |
+        echo "Installing cert-manager ..."
+        CERT_MANAGER_VERSION="v1.5.0"
+        kubectl create namespace cert-manager
+        sleep 2
+        kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/${CERT_MANAGER_VERSION}/cert-manager.yaml
 
     - name: Build & Apply manifests
       run: |
