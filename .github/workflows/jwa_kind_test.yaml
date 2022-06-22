@@ -69,11 +69,8 @@ jobs:
           curl -L https://istio.io/downloadIstio | ISTIO_VERSION=${ISTIO_VERSION} sh -
           cd istio-${ISTIO_VERSION}
           export PATH=$PWD/bin:$PATH
-          istioctl manifest generate > /home/runner/work/kubeflow/kubeflow/generated-manifest.yaml
+          istioctl install
         popd
-
-        kubectl create ns istio-system
-        for i in 1 2 3 ; do kustomize build ./ | kubectl apply -f - && break || sleep 15; done
 
     - name: Build & Apply manifests
       run: |
