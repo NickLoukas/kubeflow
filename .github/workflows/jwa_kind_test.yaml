@@ -73,7 +73,7 @@ jobs:
         popd
 
         kubectl create ns istio-system
-        for i in 1 2 3 ; do kustomize build generated-manifest.yaml | kubectl apply -f - && break || sleep 15; done
+        for i in 1 2 3 ; do kustomize build ./ | kubectl apply -f - && break || sleep 15; done
 
     - name: Build & Apply manifests
       run: |
