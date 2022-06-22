@@ -72,6 +72,9 @@ jobs:
           istioctl install -y
         popd
 
+    - name: Install cert-manager
+      run: kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager.yaml
+
     - name: Build & Apply manifests
       run: |
         cd components/admission-webhook/manifests
