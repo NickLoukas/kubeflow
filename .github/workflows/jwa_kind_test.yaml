@@ -71,6 +71,7 @@ jobs:
           export PATH=$PWD/bin:$PATH
           istioctl manifest generate > /home/runner/work/kubeflow/kubeflow/components/crud-web-apps/jupyter/manifests/overlays/istio/generated-manifest.yaml
         popd
+        istioctl x precheck
 
         kubectl create ns istio-system
         kubectl create ns kubeflow
