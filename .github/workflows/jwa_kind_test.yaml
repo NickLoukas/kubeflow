@@ -60,7 +60,7 @@ jobs:
         chmod a+x kustomize_kustomize.v3.2.3_linux_amd64
         sudo mv kustomize_kustomize.v3.2.3_linux_amd64 /usr/local/bin/kustomize
 
-    - name: Build manifests
+    - name: Install Istio
       run: |
         ISTIO_VERSION="1.11.0"
         echo "Installing Istio ..."
@@ -69,10 +69,13 @@ jobs:
           curl -L https://istio.io/downloadIstio | ISTIO_VERSION=${ISTIO_VERSION} sh -
           cd istio-${ISTIO_VERSION}
           export PATH=$PWD/bin:$PATH
-          istioctl manifest generate > /home/runner/work/kubeflow/kubeflow/components/crud-web-apps/jupyter/manifests/overlays/istio/generated-manifest.yaml
+          istioctl manifest generate > /home/runner/work/kubeflow/kubeflow/generated-manifest.yaml
         popd
-        istioctl x precheck
 
         kubectl create ns istio-system
-        kubectl create ns kubeflow
-        for i in 1 2 3 ; do kustomize build components/crud-web-apps/jupyter/manifests/overlays/istio | kubectl apply -f - && break || sleep 15; done
+        for i in 1 2 3 ; do kustomize build generated-manifest.yaml | kubectl apply -f - && break || sleep 15; done
+
+    - name: Build & Apply manifests
+      run: |
+        cd components/crud-web-apps/jupyter/manifests
+        kustomize build overlays/istio | kubectl apply -f -
