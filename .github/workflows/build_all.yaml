@@ -19,4 +19,6 @@ jobs:
     - name: Run script
       run: |
         TAG=$(cat releasing/version/VERSION)
+        pip install -U pip setuptools wheel
+        pip install ruamel.yaml
         releasing/update-manifests-images $TAG
