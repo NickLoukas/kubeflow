@@ -42,4 +42,5 @@ jobs:
       if: github.event_name == 'push'
       run: |
         cd components/crud-web-apps/jupyter
+        export IMG=docker.io/nickloukas/test-actions
         make docker-push
