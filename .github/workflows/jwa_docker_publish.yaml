@@ -1,6 +1,14 @@
 name: Build & Publish JWA Docker image
 on:
-  [push, pull_request]:
+  push:
+    branches:
+      - test-built-images-commit
+      - master
+      - v*-branch
+    paths:
+      - components/crud-web-apps/jupyter/**
+      - components/crud-web-apps/common/**
+  pull_request:
     branches:
       - test-built-images-commit
       - master
