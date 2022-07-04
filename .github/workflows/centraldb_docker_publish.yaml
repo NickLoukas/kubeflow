@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - v*-branch
+      - test-github-ref
     paths:
       - components/centraldashboard/**
   pull_request:
