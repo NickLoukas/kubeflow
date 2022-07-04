@@ -23,7 +23,9 @@ jobs:
       uses: actions/checkout@v3
       
     - name: Test
-      run: echo "${{ github.ref }}"
+      run: |
+        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+        echo $VERSION
 
     - name: Login to DockerHub
       if: github.event_name == 'push'
