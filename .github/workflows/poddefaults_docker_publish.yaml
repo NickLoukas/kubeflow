@@ -31,10 +31,7 @@ jobs:
 
     - name: Login to DockerHub
       if: github.event_name == 'push'
-      uses: docker/login-action@v2
-      with:
-        username: kubeflownotebookswg
-        password: ${{ secrets.KUBEFLOWNOTEBOOKSWG_DOCKER_TOKEN }}
+      run: echo "Hello world"
 
     - name: Run PodDefaults build
       run: |
@@ -44,17 +41,9 @@ jobs:
 
     - name: Run PodDefaults push
       if: github.event_name == 'push'
-      run: |
-        cd components/admission-webhook
-        export IMG=kubeflownotebookswg/poddefaults-webhook
-        make docker-push
+      run: echo "Hello world"
 
     - name: Run PodDefaults push on Version change
       id: version
       if: github.event_name == 'push' && steps.filter.outputs.version == 'true'
-      run: |
-        export TAG=$(cat releasing/version/VERSION)
-        cd components/admission-webhook
-        export IMG=kubeflownotebookswg/poddefaults-webhook
-        make docker-build
-        make docker-push
+      run: echo "Hello world"

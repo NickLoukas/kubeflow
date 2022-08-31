@@ -33,10 +33,7 @@ jobs:
 
     - name: Login to DockerHub
       if: github.event_name == 'push'
-      uses: docker/login-action@v2
-      with:
-        username: kubeflownotebookswg
-        password: ${{ secrets.KUBEFLOWNOTEBOOKSWG_DOCKER_TOKEN }}
+      run: echo "Hello world"
 
     - name: Build all Notebook Server images via central-Makefile
       run: |
@@ -46,20 +43,9 @@ jobs:
 
     - name: Push Notebook Server images via their Makefile
       if: github.event_name == 'push'
-      run: |
-        cd components/example-notebook-servers/
-        export TAG=$(git describe --tags --always --dirty)
-        export REGISTRY=kubeflownotebookswg
-        docker tag jupyter-scipy:${TAG} ${REGISTRY}/jupyter-scipy:${TAG}
-        docker push ${REGISTRY}/jupyter-scipy:${TAG}
+      run: echo "Hello world"
 
     - name: Push Notebook Server images via their Makefile on Version change
       id: version
       if: github.event_name == 'push' && steps.filter.outputs.version == 'true'
-      run: |
-        export TAG=$(cat releasing/version/VERSION)
-        cd components/example-notebook-servers/
-        make docker-build -C jupyter-scipy TAG=${TAG}
-        export REGISTRY=kubeflownotebookswg
-        docker tag jupyter-scipy:${TAG} ${REGISTRY}/jupyter-scipy:${TAG}
-        docker push ${REGISTRY}/jupyter-scipy:${TAG}
+      run: echo "Hello world"
